@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <display-name>TicketIT Booking System</display-name>
+
+    <context-param>
+        <param-name>MONGODB_HOST</param-name>
+        <param-value>localhost</param-value>
+    </context-param>
+    <context-param>
+        <param-name>MONGODB_PORT</param-name>
+        <param-value>27017</param-value>
+    </context-param>
+
+    <!-- Servlet for the home page -->
+    <servlet>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>com.TicketIT.Servlets.HomeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern></url-pattern>
+    </servlet-mapping>
+
+    <!-- Servlet for the ticket selection page -->
+    <servlet>
+        <servlet-name>TicketSelectionServlet</servlet-name>
+        <servlet-class>com.TicketIT.Servlets.TicketSelectionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TicketSelectionServlet</servlet-name>
+        <url-pattern>/ticketSelection</url-pattern>
+    </servlet-mapping>
+
+    <!-- Servlet for the checkout page -->
+    <servlet>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <servlet-class>com.TicketIT.Servlets.CheckoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+
+    <!-- Servlet for the purchase page -->
+    <servlet>
+        <servlet-name>PurchaseServlet</servlet-name>
+        <servlet-class>com.TicketIT.Servlets.PurchaseServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PurchaseServlet</servlet-name>
+        <url-pattern>/purchase</url-pattern>
+    </servlet-mapping>
+
+</web-app>
