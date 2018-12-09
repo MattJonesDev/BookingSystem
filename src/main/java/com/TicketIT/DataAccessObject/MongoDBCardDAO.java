@@ -49,6 +49,20 @@ public class MongoDBCardDAO {
         return CardConverter.ToCardObject(data);
     }
 
+    public Card GetCardByNumber(String cardNumber) {
+        DBObject query = BasicDBObjectBuilder.start().append("number", cardNumber).get();
+        DBObject data = this.collection.findOne(query);
+        return CardConverter.ToCardObject(data);
+    }
+
+    public Boolean DoesCardExist(String cardNumber) {
+        DBObject query = BasicDBObjectBuilder.start().append("number", cardNumber).get();
+        DBObject data = this.collection.findOne(query);
+        if(data != null)
+            return true;
+        return false;
+    }
+
     public List<Card> GetAllCards() {
         List<Card> data = new ArrayList<>();
         DBCursor cursor = collection.find();

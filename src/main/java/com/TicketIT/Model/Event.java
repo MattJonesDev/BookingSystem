@@ -35,4 +35,8 @@ public class Event {
     public String getTime() { return time; }
 
     public void setTime(String time) { this.time = time; }
+
+    public String getNameAsImagePath(){
+        return "images/" + this.title.toLowerCase().replaceAll("\\s+","") + ".jpg";
+    }
 }

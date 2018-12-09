@@ -2,12 +2,14 @@ body {
     background-color: rgba(46, 39, 50, 1.0);
     font-family: "Arial";
 }
+body h1, h2 {
+    text-align: center;
+}
 
 /*
 * Main parts of the page.
 * Header, Content/Body and Footer.
 */
-
 .pageHeader {
     background-color: rgba(232, 171, 85, 1.0);
     margin: 0 auto 0 auto;
@@ -36,12 +38,11 @@ body {
 /*
 * Parts of the header of the page.
 */
-
 .websiteLogo {
     background-color: rgba(120, 157, 200, 1.0);
     position: relative;
     left: 50px;
-    top: 40px;
+    top: 25px;
 }
 .headerUserAccount {
     position: relative;
@@ -54,6 +55,7 @@ body {
 */
 .eventSummary {
     background-color: rgba(181, 82, 43, 1.0);
+    background-size: cover;
     margin: 10px auto 10px auto;
     width: 95%;
     height: 130px;
@@ -61,6 +63,8 @@ body {
 .eventSummary #titleAndDescription {
     position: relative;
     color: rgb(255, 255, 255);
+    text-shadow: #000 0px 0px 1px, #000 0px 0px 1px, #000 0px 0px 1px,
+                 #000 0px 0px 1px, #000 0px 0px 1px, #000 0px 0px 1px;
     float: left;
     width: 80%;
     height: 100%;
@@ -71,6 +75,7 @@ body {
     left: 20px;
 }
 .eventSummary #priceAndBuy {
+    background-color: rgba(255, 255, 255, 0.25);
     float: left;
     text-align: center;
     width: 20%;
@@ -85,45 +90,44 @@ body {
 
 
 /*
-* Table that will hold the available
-* tickets available on the tickets
-* selection page.
+* Information Selection Table
 */
-.ticketTypesForm {
+.infoSelectForm {
     margin: 5px auto;
     width: 80%;
 }
-.ticketTypesForm button {
+.infoSelectForm button {
     border-radius: 10px;
     width: 90px;
     height: 30px;
 }
-.ticketTypesTable {
+.infoSelectTable {
     border-collapse: collapse;
     text-align: center;
     width: 100%;
 }
-.ticketTypesTable td, .ticketTypesTable th {
+.infoSelectTable td, .infoSelectTable th {
     border: 1px solid #ddd;
     padding: 8px;
 }
-.ticketTypesTable th {
+.infoSelectTable th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
-    background-color: #4CAF50;
+    background-color: rgba(198, 146, 71, 1.0);
     color: white;
 }
 
 /*
-* The form for the checkout page.
+* Styled form for entering details
 */
-.checkoutTable {
+.detailsTable {
     border: None;
     text-align: center;
     width: 100%;
 }
-.checkoutForm input[type=text], select {
+.detailsForm input[type=text], input[type=email],
+        input[type=password], select {
     padding: 10px 14px;
     margin: 2px 0;
     display: inline-block;
@@ -131,7 +135,7 @@ body {
     border-radius: 4px;
     box-sizing: border-box;
 }
-.checkoutForm button {
+.detailsForm button {
     border-radius: 10px;
     width: 90px;
     height: 30px;

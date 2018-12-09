@@ -1,0 +1,6 @@
+1) Add the admin dashboard for admins.
+2) Send email confirmation upon booking completion.
+3) Make the cards be stored securely. (encrypt)
+4) Add total availability of an event to the summary screen.
+2) Improve how the MongoDB stuff works.
+3) Refactor and improve methods.

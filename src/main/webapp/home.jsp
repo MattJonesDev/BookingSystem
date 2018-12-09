@@ -9,12 +9,21 @@
 
     <body>
         <div class="pageHeader">
-            <img class="websiteLogo" src="Resources/logo.png" alt="TicketIT Logo">
+            <img class="websiteLogo" src="images/logo.png" alt="TicketIT Logo">
             <div class="headerUserAccount">
-                <!-- Todo - Implement User login / account -->
-                <form>
-                    <table><tr><th><button type="submit" style="float: right;">Login</button></th></tr></table>
-                </form>
+                <c:if test="${!cookie.containsKey('memberId')}">
+                    <form action="login" method="GET">
+                        <table><tr><th><button type="submit" style="float: right;">Login</button></th></tr></table>
+                    </form>
+                </c:if>
+                <c:if test="${cookie.containsKey('memberId')}">
+                    <form action="logout" method="POST">
+                        <table><tr><th><button type="submit" style="float: right;">Logout</button></th></tr></table>
+                    </form>
+                    <form action="dashboard" method="GET">
+                        <table><tr><th><button type="submit" style="float: right;">Dashboard</button></th></tr></table>
+                    </form>
+                </c:if>
             </div>
         </div>
 
@@ -22,7 +31,7 @@
             <!-- Dynamically add summary div for each event available -->
             <c:forEach items="${eventList}" var="event">
                 <div class="eventSummary"/>
-                    <div id="titleAndDescription">
+                    <div id="titleAndDescription" style="background-image: url(${event.getNameAsImagePath()})">
                         <p><b>${event.getTitle()}</b><br>${event.getDescription()}</p>
                     </div>
 
