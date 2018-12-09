@@ -1,5 +1,6 @@
 package com.TicketIT.Converter;
 
+import java.util.List;
 import java.util.UUID;
 import com.TicketIT.Model.Customer;
 import com.mongodb.BasicDBObjectBuilder;
@@ -21,6 +22,7 @@ public class CustomerConverter {
         if (customer.getId() != null)
             builder = builder.append("_id", new ObjectId(customer.getId()));
 
+        builder.append("email", customer.getEmail());
         builder.append("name", customer.getName());
         builder.append("address", customer.getAddress());
         builder.append("telephone", customer.getTelephone());
@@ -39,10 +41,12 @@ public class CustomerConverter {
         ObjectId id = (ObjectId) doc.get("_id");
         customer.setId(id.toString());
 
+        if(doc.get("email") != null)
+            customer.setEmail(doc.get("email").toString());
         if(doc.get("name") != null)
             customer.setName(doc.get("name").toString());
         if(doc.get("address") != null)
-            customer.setAddress(doc.get("address").toString());
+            customer.setAddress((List<String>) doc.get("address"));
         if(doc.get("telephone") != null)
             customer.setTelephone(doc.get("telephone").toString());
 

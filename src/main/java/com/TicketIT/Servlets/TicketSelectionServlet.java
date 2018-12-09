@@ -25,8 +25,7 @@ public class TicketSelectionServlet extends HttpServlet {
         MongoDBEventDAO eventDAO = new MongoDBEventDAO(mongo);
         List<Ticket> tickets = ticketDAO.GetAllTickets();
 
-        // ToDo: Move logic somewhere else? Simplify?
-        ArrayList<Ticket> eventTickets = new ArrayList<Ticket>();
+        ArrayList<Ticket> eventTickets = new ArrayList<>();
         for(Ticket ticket : tickets){
             if(ticket.getEventId().equals(request.getParameter("eventId")))
                 eventTickets.add(ticket);
@@ -42,6 +41,6 @@ public class TicketSelectionServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.sendRedirect(request.getContextPath());
     }
 }
