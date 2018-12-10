@@ -20,7 +20,7 @@
                     <form action="logout" method="POST" style="display:inline-block">
                         <table><tr><th><button type="submit" style="float: right;">Logout</button></th></tr></table>
                     </form>
-                    <form action="dashboard" method="GET" style="display:inline-block">
+                    <form action="admin" method="GET" style="display:inline-block">
                         <table><tr><th><button type="submit" style="float: right;">Dashboard</button></th></tr></table>
                     </form>
                 </c:if>
@@ -28,6 +28,8 @@
         </div>
 
         <div class="pageContent">
+            <h1>Create a new event</h1><br>
+
             <!-- Form to create a new event. -->
             <form class="detailsForm" action="adminCreate" method="POST" enctype="multipart/form-data">
                 <table class="detailsTable">

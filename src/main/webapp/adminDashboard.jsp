@@ -20,7 +20,7 @@
                     <form action="logout" method="POST" style="display:inline-block">
                         <table><tr><th><button type="submit" style="float: right;">Logout</button></th></tr></table>
                     </form>
-                    <form action="dashboard" method="GET" style="display:inline-block">
+                    <form action="admin" method="GET" style="display:inline-block">
                         <table><tr><th><button type="submit" style="float: right;">Dashboard</button></th></tr></table>
                     </form>
                 </c:if>
@@ -28,11 +28,17 @@
         </div>
 
         <div class="pageContent">
-            <span>Events</span>
             <!-- Option to create an event. -->
-            <form action="adminCreate" method="GET">
-                <button id="createEventButton" type="submit">Create</button>
-            </form>
+            <table>
+                <tr>
+                    <th><span>Events</span></th>
+                    <th>
+                        <form action="adminCreate" method="GET">
+                            <button id="createEventButton" type="submit">Create</button>
+                        </form>
+                    </th>
+                </tr>
+            </table>
 
             <!-- List events and have option to edit. -->
             <c:forEach items="${eventList}" var="event">
