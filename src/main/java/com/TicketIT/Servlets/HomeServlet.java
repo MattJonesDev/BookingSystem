@@ -25,7 +25,6 @@ public class HomeServlet extends HttpServlet {
         // Get all events from database.
         MongoClient mongo = (MongoClient) request.getServletContext().getAttribute("MONGO_CLIENT");
         MongoDBEventDAO eventDAO = new MongoDBEventDAO(mongo);
-        List<Event> events = eventDAO.GetAllEvents();
 
         // If a bookingId is provided with POST request, cancel it.
         if(request.getParameter("bookingId") != null){
@@ -47,7 +46,7 @@ public class HomeServlet extends HttpServlet {
             bookingDAO.DeleteBooking(bookingDAO.GetBookingById(request.getParameter("bookingId")));
         }
 
-        request.setAttribute("eventList", events);
+        request.setAttribute("eventList", eventDAO.GetAllEvents());
         request.getRequestDispatcher("/home.jsp").forward(request, response);
     }
 
@@ -56,9 +55,8 @@ public class HomeServlet extends HttpServlet {
         // Get all events from database.
         MongoClient mongo = (MongoClient) request.getServletContext().getAttribute("MONGO_CLIENT");
         MongoDBEventDAO eventDAO = new MongoDBEventDAO(mongo);
-        List<Event> events = eventDAO.GetAllEvents();
 
-        request.setAttribute("eventList", events);
+        request.setAttribute("eventList", eventDAO.GetAllEvents());
         request.getRequestDispatcher("/home.jsp").forward(request, response);
     }
 }
