@@ -20,7 +20,7 @@
                     <form action="logout" method="POST" style="display:inline-block">
                         <table><tr><th><button type="submit" style="float: right;">Logout</button></th></tr></table>
                     </form>
-                    <form action="dashboard" method="GET" style="display:inline-block">
+                    <form action="admin" method="GET" style="display:inline-block">
                         <table><tr><th><button type="submit" style="float: right;">Dashboard</button></th></tr></table>
                     </form>
                 </c:if>
@@ -28,37 +28,31 @@
         </div>
 
         <div class="pageContent">
+            <h1>Edit event</h1><br>
+            <h2>Event Details</h2>
             <!-- Editing of details of the event. -->
-            <form class="detailsForm" action="adminEdit" method="POST">
+            <form action="adminEdit" method="POST">
                 <input type="hidden" name="action" value="editEvent">
                 <input type="hidden" name="eventId" value="${eventId}">
                 <table class="detailsTable">
                     <tr>
                         <td><input type="text" name="eventTitle" placeholder="Event Title"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="eventDesc" placeholder="Event Description"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="file" name="eventImage" placeholder="Event Image" accept="image/jpeg"></td>
-                    </tr>
-                    <tr>
-                        <td> </td>
                         <td><input type="date" name="eventDate" placeholder="Event Date"></td>
                     </tr>
                     <tr>
-                        <td> </td>
+                        <td><input type="text" name="eventDesc" placeholder="Event Description"></td>
                         <td><input type="time" name="eventTime" placeholder="Event Time"></td>
                     </tr>
                     <tr>
-                        <td> </td>
+                        <td><input type="file" name="eventImage" placeholder="Event Image" accept="image/jpeg"></td>
                         <td><button type="submit" style="text-align: center">Save</button></td>
                     </tr>
                 </table>
             </form>
-
+            <br></br>
+            <h2>Edit Event Tickets</h2>
             <!-- Create a new ticket for the event -->
-            <form class="detailsForm" action="adminEdit" method="POST">
+            <form action="adminEdit" method="POST">
                 <input type="hidden" name="action" value="createTicket">
                 <table class="detailsTable">
                     <tr>
@@ -69,10 +63,9 @@
                     </tr>
                 </table>
             </form>
-
             <!-- List tickets for the event with option to delete. -->
             <c:forEach items="${eventTickets}" var="ticket">
-                <form class="detailsForm" action="adminEdit" method="POST">
+                <form action="adminEdit" method="POST">
                     <input type="hidden" name="action" value="deleteTicket">
                     <input type="hidden" name="ticketId" value="${ticket.getId()}">
                     <table class="detailsTable">
