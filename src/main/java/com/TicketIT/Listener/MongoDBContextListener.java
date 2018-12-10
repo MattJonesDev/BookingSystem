@@ -14,6 +14,8 @@ public class MongoDBContextListener implements ServletContextListener {
     /**
      * Create the MongoClient instance when the web application
      * initialization process is starting.
+     *
+     * @param event Event to process.
      */
     @Override
     public void contextInitialized(ServletContextEvent event) {
@@ -30,6 +32,8 @@ public class MongoDBContextListener implements ServletContextListener {
     /**
      * Close the MongoClient instance when the ServletContext
      * is about to be shut down.
+     *
+     * @param event Event to process.
      */
     @Override
     public void contextDestroyed(ServletContextEvent event) {

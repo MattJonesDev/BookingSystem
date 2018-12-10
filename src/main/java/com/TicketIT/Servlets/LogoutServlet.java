@@ -11,6 +11,7 @@ import java.io.IOException;
 @WebServlet(name = "LogoutServlet")
 public class LogoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Remove cookies.
         Cookie cookie = new Cookie("memberId", "");
         cookie.setMaxAge(0);
         response.addCookie(cookie);

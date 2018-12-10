@@ -16,12 +16,11 @@ import java.util.List;
 @WebServlet(name = "RegisterServlet")
 public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Get required DAOs
         MongoClient mongo = (MongoClient) request.getServletContext().getAttribute("MONGO_CLIENT");
         MongoDBMemberDAO memberDAO = new MongoDBMemberDAO(mongo);
         MongoDBCardDAO cardDAO = new MongoDBCardDAO(mongo);
 
-        // Populate Member.
+        // Populate Member object.
         Member member = memberDAO.CreateMember(new Member());
         member.setEmail(request.getParameter("email"));
         member.setPassword(request.getParameter("password"));
@@ -36,7 +35,7 @@ public class RegisterServlet extends HttpServlet {
         memberAddress.add(request.getParameter("addressPostcode"));
         member.setAddress(memberAddress);
 
-        // Create card if it doesn't exist already.
+        // Create card object if it doesn't exist already.
         if(!cardDAO.DoesCardExist(request.getParameter("cardNumber"))) {
             Card card = cardDAO.CreateCard(new Card());
             card.setType(request.getParameter("cardType"));
@@ -49,7 +48,7 @@ public class RegisterServlet extends HttpServlet {
             member.setCardId(cardDAO.GetCardByNumber(request.getParameter("cardNumber")).getId());
         }
 
-        // Update member in database with changes above.
+        // Update member object in database.
         memberDAO.UpdateMember(member);
         request.getRequestDispatcher("/login.jsp").forward(request, response);
     }

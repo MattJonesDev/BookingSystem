@@ -8,24 +8,24 @@
     </head>
 
     <body>
-        <div class="pageHeader">
-            <img class="websiteLogo" src="images/logo.png" alt="TicketIT Logo">
-            <div class="headerUserAccount">
-                <c:if test="${!cookie.containsKey('memberId')}">
-                    <form action="login" method="GET">
-                        <table><tr><th><button type="submit" style="float: right;">Login</button></th></tr></table>
-                    </form>
-                </c:if>
-                <c:if test="${cookie.containsKey('memberId')}">
-                    <form action="logout" method="POST">
-                        <table><tr><th><button type="submit" style="float: right;">Logout</button></th></tr></table>
-                    </form>
-                    <form action="dashboard" method="GET">
-                        <table><tr><th><button type="submit" style="float: right;">Dashboard</button></th></tr></table>
-                    </form>
-                </c:if>
-            </div>
+    <div class="pageHeader">
+        <img class="websiteLogo" src="images/logo.png" alt="TicketIT Logo">
+        <div class="headerUserAccount">
+            <c:if test="${!cookie.containsKey('memberId')}">
+                <form action="login" method="GET" style="display:inline-block">
+                    <table><tr><th><button type="submit" style="float: right;">Login</button></th></tr></table>
+                </form>
+            </c:if>
+            <c:if test="${cookie.containsKey('memberId')}">
+                <form action="logout" method="POST" style="display:inline-block">
+                    <table><tr><th><button type="submit" style="float: right;">Logout</button></th></tr></table>
+                </form>
+                <form action="dashboard" method="GET" style="display:inline-block">
+                    <table><tr><th><button type="submit" style="float: right;">Dashboard</button></th></tr></table>
+                </form>
+            </c:if>
         </div>
+    </div>
 
         <div class="pageContent">
 
