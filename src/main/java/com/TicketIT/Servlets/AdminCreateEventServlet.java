@@ -23,8 +23,10 @@ public class AdminCreateEventServlet extends HttpServlet {
         MongoDBMemberDAO memberDAO = new MongoDBMemberDAO(mongo);
 
         // Validate that the user is allowed to be here.
-        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies()))
+        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies())) {
             response.sendRedirect(request.getContextPath());
+            return;
+        }
 
         // Create new Event Object
         MongoDBEventDAO eventDAO = new MongoDBEventDAO(mongo);
@@ -62,8 +64,10 @@ public class AdminCreateEventServlet extends HttpServlet {
         MongoDBMemberDAO memberDAO = new MongoDBMemberDAO(mongo);
 
         // Validate that the user is allowed to be here.
-        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies()))
+        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies())) {
             response.sendRedirect(request.getContextPath());
+            return;
+        }
 
         request.getRequestDispatcher("/adminDashboardCreate.jsp").forward(request, response);
     }

@@ -22,8 +22,10 @@ public class AdminDashboardServlet extends HttpServlet {
         MongoDBMemberDAO memberDAO = new MongoDBMemberDAO(mongo);
 
         // Validate that the user is allowed to be here.
-        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies()))
+        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies())) {
             response.sendRedirect(request.getContextPath());
+            return;
+        }
 
         // If there's a action request, process it.
         if(request.getParameterMap().containsKey("action")){
@@ -43,8 +45,10 @@ public class AdminDashboardServlet extends HttpServlet {
         MongoDBMemberDAO memberDAO = new MongoDBMemberDAO(mongo);
 
         // Validate that the user is allowed to be here.
-        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies()))
+        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies())) {
             response.sendRedirect(request.getContextPath());
+            return;
+        }
 
         // Get all events from database.
         MongoDBEventDAO eventDAO = new MongoDBEventDAO(mongo);

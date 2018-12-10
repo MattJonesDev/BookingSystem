@@ -25,12 +25,16 @@ public class AdminEditEventServlet extends HttpServlet {
         MongoDBMemberDAO memberDAO = new MongoDBMemberDAO(mongo);
 
         // Validate that the user is allowed to be here.
-        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies()))
+        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies())) {
             response.sendRedirect(request.getContextPath());
+            return;
+        }
 
         // An eventId must be supplied in order to edit it.
-        if(!request.getParameterMap().containsKey("eventId"))
+        if(!request.getParameterMap().containsKey("eventId")) {
             response.sendRedirect(request.getContextPath() + "/admin");
+            return;
+        }
 
         MongoDBTicketDAO ticketDAO = new MongoDBTicketDAO(mongo);
         if (request.getParameterMap().containsKey("action")) {
@@ -74,12 +78,16 @@ public class AdminEditEventServlet extends HttpServlet {
         MongoDBMemberDAO memberDAO = new MongoDBMemberDAO(mongo);
 
         // Validate that the user is allowed to be here.
-        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies()))
+        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies())) {
             response.sendRedirect(request.getContextPath());
+            return;
+        }
 
         // If an eventId has not been supplied, it cannot be edited.
-        if(!request.getParameterMap().containsKey("eventId"))
+        if(!request.getParameterMap().containsKey("eventId")) {
             response.sendRedirect(request.getContextPath());
+            return;
+        }
 
         // Retrieve a list of tickets for the event.
         MongoDBTicketDAO ticketDAO = new MongoDBTicketDAO(mongo);
