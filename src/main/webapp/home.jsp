@@ -20,7 +20,7 @@
                     <form action="logout" method="POST" style="display:inline-block">
                         <table><tr><th><button type="submit" style="float: right;">Logout</button></th></tr></table>
                     </form>
-                    <form action="dashboard" method="GET" style="display:inline-block">
+                    <form action="admin" method="GET" style="display:inline-block">
                         <table><tr><th><button type="submit" style="float: right;">Dashboard</button></th></tr></table>
                     </form>
                 </c:if>
