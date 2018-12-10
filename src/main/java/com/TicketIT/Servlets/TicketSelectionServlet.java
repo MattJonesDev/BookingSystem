@@ -2,7 +2,6 @@ package com.TicketIT.Servlets;
 
 import com.TicketIT.DataAccessObject.MongoDBEventDAO;
 import com.TicketIT.DataAccessObject.MongoDBTicketDAO;
-import com.TicketIT.Model.Event;
 import com.TicketIT.Model.Ticket;
 import com.mongodb.MongoClient;
 

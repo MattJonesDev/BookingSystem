@@ -1,8 +1,5 @@
 package com.TicketIT.Model;
 
-import java.util.Date;
-import java.util.UUID;
-
 public class Card {
 
     private String id;

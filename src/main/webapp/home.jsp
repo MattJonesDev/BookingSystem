@@ -31,7 +31,7 @@
             <!-- Dynamically add summary div for each event available -->
             <c:forEach items="${eventList}" var="event">
                 <div class="eventSummary"/>
-                    <div id="titleAndDescription" style="background-image: url(${event.getNameAsImagePath()})">
+                    <div id="titleAndDescription" style="background-image: url(${event.getImageBackground()})">
                         <p><b>${event.getTitle()}</b><br>${event.getDescription()}</p>
                     </div>
 
