@@ -55,6 +55,6 @@ public class AdminDashboardServlet extends HttpServlet {
         List<Event> events = eventDAO.GetAllEvents();
 
         request.setAttribute("eventList", events);
-        request.getRequestDispatcher("/home.jsp").forward(request, response);
+        request.getRequestDispatcher("/adminDashboard.jsp").forward(request, response);
     }
 }
