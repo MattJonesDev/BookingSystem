@@ -1,7 +1,6 @@
 package com.TicketIT.Model;
 
 import java.util.List;
-import java.util.UUID;
 
 public class Customer {
 

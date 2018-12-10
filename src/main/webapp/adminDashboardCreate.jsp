@@ -46,7 +46,7 @@
                         <td><input type="text" name="ticketPrice" placeholder="Ticket Price" required></td>
                     </tr>
                     <tr>
-                        <td><input type="file" name="eventImage" placeholder="Event Image" accept="image/jpeg"></td>
+                        <td> </td>
                         <td><input type="text" name="ticketAvailable" placeholder="Number Available" required></td>
                     </tr>
                     <tr>

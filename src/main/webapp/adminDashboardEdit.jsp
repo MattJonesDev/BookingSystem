@@ -44,7 +44,7 @@
                         <td><input type="time" name="eventTime" placeholder="Event Time"></td>
                     </tr>
                     <tr>
-                        <td><input type="file" name="eventImage" placeholder="Event Image" accept="image/jpeg"></td>
+                        <td> </td>
                         <td><button type="submit" style="text-align: center">Save</button></td>
                     </tr>
                 </table>
