@@ -36,7 +36,7 @@
                     </div>
 
                     <div id="priceAndBuy">
-                        <form action="ticketSelection" method="post">
+                        <form action="ticketSelection" method="POST">
                             <input type="hidden" name="eventId" value="${event.getId()}">
                             <button id="purchaseButton" type="submit">Purchase</button>
                         </form>
