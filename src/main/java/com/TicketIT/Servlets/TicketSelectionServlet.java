@@ -18,24 +18,19 @@ import java.util.List;
 @WebServlet(name = "TicketSelectionServlet")
 public class TicketSelectionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        // Get all events from database.
         MongoClient mongo = (MongoClient) request.getServletContext().getAttribute("MONGO_CLIENT");
         MongoDBTicketDAO ticketDAO = new MongoDBTicketDAO(mongo);
         MongoDBEventDAO eventDAO = new MongoDBEventDAO(mongo);
         List<Ticket> tickets = ticketDAO.GetAllTickets();
 
+        // Get all the tickets for the event.
         ArrayList<Ticket> eventTickets = new ArrayList<>();
         for(Ticket ticket : tickets){
             if(ticket.getEventId().equals(request.getParameter("eventId")))
                 eventTickets.add(ticket);
         }
 
-        // Get event
-        Event chosenEvent = new Event();
-        chosenEvent.setId(request.getParameter("eventId"));
-
-        request.setAttribute("chosenEvent", eventDAO.GetEvent(chosenEvent));
+        request.setAttribute("chosenEvent", eventDAO.GetEventById(request.getParameter("eventId")));
         request.setAttribute("eventTicketsList", eventTickets);
         request.getRequestDispatcher("/ticketSelection.jsp").forward(request, response);
     }

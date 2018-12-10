@@ -15,10 +15,10 @@ import java.io.IOException;
 @WebServlet(name = "LoginServlet")
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Get required DAOs
         MongoClient mongo = (MongoClient) request.getServletContext().getAttribute("MONGO_CLIENT");
         MongoDBMemberDAO memberDAO = new MongoDBMemberDAO(mongo);
 
+        // Validate user login.
         if(memberDAO.DoesMemberExist(request.getParameter("userEmail"))) {
             Member member = memberDAO.GetMemberByEmail(request.getParameter("userEmail"));
             if(member.getPassword().equals(request.getParameter("userPassword"))){
@@ -28,6 +28,8 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath());
             }
         }
+
+        // Alert if unsuccessful.
         response.getWriter().println("<script type=\"text/javascript\">");
         response.getWriter().println("alert('User or password incorrect');");
         response.getWriter().println("location='login.jsp';");

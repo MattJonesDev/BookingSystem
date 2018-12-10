@@ -17,7 +17,6 @@ import java.util.List;
 @WebServlet(name = "CheckoutServlet")
 public class CheckoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Get required DAOs
         MongoClient mongo = (MongoClient) request.getServletContext().getAttribute("MONGO_CLIENT");
         MongoDBEventDAO eventDAO = new MongoDBEventDAO(mongo);
         MongoDBBookingDAO bookingDAO = new MongoDBBookingDAO(mongo);
@@ -28,7 +27,7 @@ public class CheckoutServlet extends HttpServlet {
         Booking booking = bookingDAO.GetBookingById(request.getParameter("bookingId"));
         Invoice invoice = invoiceDAO.GetInvoiceById(booking.getInvoiceId());
 
-        // Populate Customer
+        // Populate Customer object.
         Customer customer = customerDAO.CreateCustomer(new Customer());
         customer.setEmail(request.getParameter("email"));
         customer.setName(request.getParameter("name"));
@@ -55,11 +54,12 @@ public class CheckoutServlet extends HttpServlet {
             invoice.setCardId(cardDAO.GetCardByNumber(request.getParameter("cardNumber")).getId());
         }
 
-        // Update Booking and Invoice
+        // Update Booking and Invoice.
         booking.setCustomerId(customer.getId());
         booking.setSendTickets(Boolean.parseBoolean(request.getParameter("sendTickets")));
         invoice.setPaid(true);
 
+        // Update objects in the database.
         customerDAO.UpdateCustomer(customer);
         bookingDAO.UpdateBooking(booking);
         invoiceDAO.UpdateInvoice(invoice);
@@ -70,11 +70,10 @@ public class CheckoutServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // If there is no event to book, return to home.
+        // The request must be to book an event.
         if(request.getParameter("eventId") == null)
             request.getRequestDispatcher("/home.jsp").forward(request, response);
 
-        // Get required DAOs
         MongoClient mongo = (MongoClient) request.getServletContext().getAttribute("MONGO_CLIENT");
         MongoDBEventDAO eventDAO = new MongoDBEventDAO(mongo);
         MongoDBTicketDAO ticketDAO = new MongoDBTicketDAO(mongo);
@@ -105,7 +104,7 @@ public class CheckoutServlet extends HttpServlet {
             }
         }
 
-        // Set tickets and invoice id for booking.
+        // Set tickets and invoice ids for booking.
         booking.setTickets(chosenTicketIds);
         booking.setInvoiceId(invoice.getId());
 
@@ -113,10 +112,12 @@ public class CheckoutServlet extends HttpServlet {
         invoiceDAO.UpdateInvoice(invoice);
         bookingDAO.UpdateBooking(booking);
 
+        // Variables to auto-fill the checkout form if the user's registered.
         if(!request.getParameter("memberId").equals("0")){
             request.setAttribute("member", memberDAO.GetMemberById(request.getParameter("memberId")));
             request.setAttribute("memberCard", cardDAO.GetCardById(memberDAO.GetMemberById(request.getParameter("memberId")).getCardId()));
         }
+
         request.setAttribute("booking", bookingDAO.GetBooking(booking));
         request.setAttribute("invoice", invoiceDAO.GetInvoice(invoice));
         request.setAttribute("chosenEvent", eventDAO.GetEventById(request.getParameter("eventId")));

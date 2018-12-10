@@ -28,31 +28,34 @@
         </div>
 
         <div class="pageContent">
-            <br><br>
-            <h1>Login</h1>
-
-            <!-- Login form -->
-            <form class="detailsForm" action="login" method="POST">
+            <!-- Form to create a new event. -->
+            <form class="detailsForm" action="adminCreate" method="POST" enctype="multipart/form-data">
                 <table class="detailsTable">
                     <tr>
-                        <td><input type="email" name="userEmail" placeholder="Email" required></td>
+                        <td><h2>Ticket</h2></td>
+                        <td><h2>Default Ticket</h2></td>
                     </tr>
                     <tr>
-                        <td><input type="password" name="userPassword" placeholder="Password" required></td>
+                        <td><input type="text" name="eventTitle" placeholder="Event Title" required></td>
+                        <td><input type="text" name="ticketName" placeholder="Ticket Name" required></td>
                     </tr>
                     <tr>
-                        <td><button type="submit" style="text-align: center">Login</button></td>
+                        <td><input type="text" name="eventDesc" placeholder="Event Description" required></td>
+                        <td><input type="text" name="ticketPrice" placeholder="Ticket Price" required></td>
                     </tr>
-                </table>
-            </form>
-            <br>
-
-            <!-- Register section -->
-            <h2>Don't have an account?</h2>
-            <form class="detailsForm" action="register" method="GET">
-                <table class="detailsTable">
                     <tr>
-                        <td><button type="submit" style="text-align: center">Register</button></td>
+                        <td><input type="file" name="eventImage" placeholder="Event Image" accept="image/jpeg"></td>
+                        <td><input type="text" name="ticketAvailable" placeholder="Number Available" required></td>
+                    </tr>
+                    <tr>
+                        <td><input type="date" name="eventDate" placeholder="Event Date" required></td>
+                    </tr>
+                    <tr>
+                        <td><input type="time" name="eventTime" placeholder="Event Time" required></td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td><button type="submit" style="text-align: center">Create</button></td>
                     </tr>
                 </table>
             </form>
@@ -63,3 +66,4 @@
         </div>
     </body>
 </html>
+

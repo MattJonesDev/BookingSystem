@@ -16,6 +16,12 @@
         <param-value>27017</param-value>
     </context-param>
 
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+
     <!-- Servlet for the home page -->
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
@@ -85,6 +91,26 @@
     <servlet-mapping>
         <servlet-name>AdminDashboardServlet</servlet-name>
         <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+
+    <!-- Servlet for the admin dashboard - Creating an event -->
+    <servlet>
+        <servlet-name>AdminCreateEventServlet</servlet-name>
+        <servlet-class>com.TicketIT.Servlets.AdminCreateEventServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminCreateEventServlet</servlet-name>
+        <url-pattern>/adminCreate</url-pattern>
+    </servlet-mapping>
+
+    <!-- Servlet for the admin dashboard - Editing an event -->
+    <servlet>
+        <servlet-name>AdminEditEventServlet</servlet-name>
+        <servlet-class>com.TicketIT.Servlets.AdminEditEventServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminEditEventServlet</servlet-name>
+        <url-pattern>/adminEdit</url-pattern>
     </servlet-mapping>
 
 </web-app>
