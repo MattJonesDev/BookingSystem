@@ -134,7 +134,7 @@
             </c:if>
 
             <!-- Cancel checkout button -->
-            <form class="detailsForm" action="home" method="post">
+            <form class="detailsForm" action="home" method="POST">
                 <table class="detailsTable">
                     <tr><td><input type="hidden" name="bookingId" value="${booking.getId()}"></td><td><button type="submit" style="text-align: center">Cancel</button></td></tr>
                 </table>

@@ -69,7 +69,7 @@
             </form><br>
 
             <!-- Cancel  button -->
-            <form class="detailsForm" action="home" method="post">
+            <form class="detailsForm" action="home" method="POST">
                 <table class="detailsTable">
                     <tr><td><button type="submit" style="text-align: center">Cancel</button></td></tr>
                 </table>
