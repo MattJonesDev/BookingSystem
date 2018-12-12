@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @WebServlet(name = "CheckoutServlet")
@@ -71,8 +70,10 @@ public class CheckoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // The request must be to book an event.
-        if(request.getParameter("eventId") == null)
+        if(request.getParameter("eventId") == null) {
             request.getRequestDispatcher("/home.jsp").forward(request, response);
+            return;
+        }
 
         MongoClient mongo = (MongoClient) request.getServletContext().getAttribute("MONGO_CLIENT");
         MongoDBEventDAO eventDAO = new MongoDBEventDAO(mongo);

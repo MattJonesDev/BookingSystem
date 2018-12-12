@@ -9,13 +9,10 @@ import com.TicketIT.Utils.AdminUtils;
 import com.mongodb.MongoClient;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import java.io.File;
 import java.io.IOException;
 
-@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 @WebServlet(name = "AdminCreateEventServlet")
 public class AdminCreateEventServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,8 +20,10 @@ public class AdminCreateEventServlet extends HttpServlet {
         MongoDBMemberDAO memberDAO = new MongoDBMemberDAO(mongo);
 
         // Validate that the user is allowed to be here.
-        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies()))
+        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies())) {
             response.sendRedirect(request.getContextPath());
+            return;
+        }
 
         // Create new Event Object
         MongoDBEventDAO eventDAO = new MongoDBEventDAO(mongo);
@@ -46,13 +45,6 @@ public class AdminCreateEventServlet extends HttpServlet {
         eventDAO.UpdateEvent(event);
         ticketDAO.UpdateTicket(ticket);
 
-        // Upload image on to the local disk.
-        String uploadPath = getServletContext().getRealPath("") + File.separator + "images";
-        for (Part part : request.getParts()) {
-            part.write(uploadPath + File.separator +
-                    (event.getTitle().toLowerCase().replaceAll("\\s+","")));
-        }
-
         // Redirect back to admin dashboard.
         request.getRequestDispatcher("/adminDashboard.jsp").forward(request, response);
     }
@@ -62,8 +54,10 @@ public class AdminCreateEventServlet extends HttpServlet {
         MongoDBMemberDAO memberDAO = new MongoDBMemberDAO(mongo);
 
         // Validate that the user is allowed to be here.
-        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies()))
+        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies())) {
             response.sendRedirect(request.getContextPath());
+            return;
+        }
 
         request.getRequestDispatcher("/adminDashboardCreate.jsp").forward(request, response);
     }

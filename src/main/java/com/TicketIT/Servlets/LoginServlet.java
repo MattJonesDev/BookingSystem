@@ -26,6 +26,7 @@ public class LoginServlet extends HttpServlet {
                 cookie.setMaxAge(900);
                 response.addCookie(cookie);
                 response.sendRedirect(request.getContextPath());
+                return;
             }
         }
 

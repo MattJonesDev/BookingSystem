@@ -9,15 +9,12 @@ import com.TicketIT.Utils.AdminUtils;
 import com.mongodb.MongoClient;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 @WebServlet(name = "AdminEditEventServlet")
 public class AdminEditEventServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,12 +22,16 @@ public class AdminEditEventServlet extends HttpServlet {
         MongoDBMemberDAO memberDAO = new MongoDBMemberDAO(mongo);
 
         // Validate that the user is allowed to be here.
-        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies()))
+        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies())) {
             response.sendRedirect(request.getContextPath());
+            return;
+        }
 
         // An eventId must be supplied in order to edit it.
-        if(!request.getParameterMap().containsKey("eventId"))
+        if(!request.getParameterMap().containsKey("eventId")) {
             response.sendRedirect(request.getContextPath() + "/admin");
+            return;
+        }
 
         MongoDBTicketDAO ticketDAO = new MongoDBTicketDAO(mongo);
         if (request.getParameterMap().containsKey("action")) {
@@ -43,13 +44,6 @@ public class AdminEditEventServlet extends HttpServlet {
                 event.setDate(request.getParameter("eventDate"));
                 event.setTime(request.getParameter("eventTime"));
                 eventDAO.UpdateEvent(event);
-
-                // Upload new event image.
-                String uploadPath = getServletContext().getRealPath("") + File.separator + "images";
-                for (Part part : request.getParts()) {
-                    part.write(uploadPath + File.separator +
-                        (event.getTitle().toLowerCase().replaceAll("\\s+","")));
-                }
             } else if (request.getParameter("action").equals("createTicket")) {
                 // Create a new ticket in database.
                 Ticket ticket = ticketDAO.CreateTicket(new Ticket());
@@ -74,12 +68,16 @@ public class AdminEditEventServlet extends HttpServlet {
         MongoDBMemberDAO memberDAO = new MongoDBMemberDAO(mongo);
 
         // Validate that the user is allowed to be here.
-        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies()))
+        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies())) {
             response.sendRedirect(request.getContextPath());
+            return;
+        }
 
         // If an eventId has not been supplied, it cannot be edited.
-        if(!request.getParameterMap().containsKey("eventId"))
+        if(!request.getParameterMap().containsKey("eventId")) {
             response.sendRedirect(request.getContextPath());
+            return;
+        }
 
         // Retrieve a list of tickets for the event.
         MongoDBTicketDAO ticketDAO = new MongoDBTicketDAO(mongo);
