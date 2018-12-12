@@ -28,11 +28,9 @@ public class AdminDashboardServlet extends HttpServlet {
 
         // If there's a action request, process it.
         if(request.getParameterMap().containsKey("action")){
-            if(request.getParameter("action").equals("createEvent")){
-                request.getRequestDispatcher("/adminDashboardCreate.jsp").forward(request, response);
-            } else if(request.getParameter("action").equals("editEvent")){
-                request.setAttribute("eventId", request.getParameter("eventId"));
-                request.getRequestDispatcher("/adminDashboardEdit.jsp").forward(request, response);
+            if(request.getParameter("action").equals("deleteEvent")) {
+                MongoDBEventDAO eventDAO = new MongoDBEventDAO(mongo);
+                eventDAO.DeleteEvent(eventDAO.GetEventById(request.getParameter("eventId")));
             }
         }
 
