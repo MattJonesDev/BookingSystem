@@ -32,6 +32,8 @@
             <table>
                 <tr>
                     <th><span>Events</span></th>
+
+                    <!-- Option to create a new event -->
                     <th>
                         <form action="adminCreate" method="GET">
                             <button id="createEventButton" type="submit">Create</button>
@@ -43,15 +45,29 @@
             <!-- List events and have option to edit. -->
             <c:forEach items="${eventList}" var="event">
                 <div>
-                    <form action="adminEdit" method="GET">
-                        <input type="hidden" name="eventId" value="${event.getId()}">
-                        <table>
-                            <tr>
-                                <th><span>${event.getTitle()}</span></th>
-                                <th><button id="editEventButton" type="submit">Edit</button></th>
-                            </tr>
-                        </table>
-                    </form>
+                    <table>
+                        <tr>
+                            <!-- List the event name -->
+                            <th><span>${event.getTitle()}</Span></th>
+
+                            <!-- Option to edit the event -->
+                            <th>
+                                <form action="adminEdit" method="GET">
+                                    <input type="hidden" name="eventId" value="${event.getId()}">
+                                    <button id="editEventButton" type="submit">Edit</button>
+                                </form>
+                            </th>
+
+                            <!-- Option to delete the event -->
+                            <th>
+                                <form action="admin" method="POST">
+                                    <input type="hidden" name="eventId" value="${event.getId()}">
+                                    <input type="hidden" name="action" value="deleteEvent">
+                                    <button id="deleteEventButton" type="submit">Delete</button>
+                                </form>
+                            </th>
+                        </tr>
+                    </table>
                 </div>
             </c:forEach>
         </div>
