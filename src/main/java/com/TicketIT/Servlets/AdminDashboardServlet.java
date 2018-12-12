@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "AdminDashboardServlet")
 public class AdminDashboardServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         MongoClient mongo = (MongoClient) request.getServletContext().getAttribute("MONGO_CLIENT");
@@ -31,6 +30,7 @@ public class AdminDashboardServlet extends HttpServlet {
             if(request.getParameter("action").equals("deleteEvent")) {
                 MongoDBEventDAO eventDAO = new MongoDBEventDAO(mongo);
                 eventDAO.DeleteEvent(eventDAO.GetEventById(request.getParameter("eventId")));
+                response.sendRedirect(request.getContextPath() + "/admin");
             }
         }
 

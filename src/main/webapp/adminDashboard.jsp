@@ -29,13 +29,13 @@
 
         <div class="pageContent">
             <!-- Option to create an event. -->
-            <table>
+            <table class="detailsTable">
                 <tr>
                     <th><span>Events</span></th>
 
                     <!-- Option to create a new event -->
                     <th>
-                        <form action="adminCreate" method="GET">
+                        <form class="detailsForm" action="adminCreate" method="GET">
                             <button id="createEventButton" type="submit">Create</button>
                         </form>
                     </th>
@@ -45,14 +45,14 @@
             <!-- List events and have option to edit. -->
             <c:forEach items="${eventList}" var="event">
                 <div>
-                    <table>
+                    <table class="detailsTable">
                         <tr>
                             <!-- List the event name -->
                             <th><span>${event.getTitle()}</Span></th>
 
                             <!-- Option to edit the event -->
                             <th>
-                                <form action="adminEdit" method="GET">
+                                <form class="detailsForm" action="adminEdit" method="GET">
                                     <input type="hidden" name="eventId" value="${event.getId()}">
                                     <button id="editEventButton" type="submit">Edit</button>
                                 </form>
@@ -60,7 +60,7 @@
 
                             <!-- Option to delete the event -->
                             <th>
-                                <form action="admin" method="POST">
+                                <form class="detailsForm" action="admin" method="POST">
                                     <input type="hidden" name="eventId" value="${event.getId()}">
                                     <input type="hidden" name="action" value="deleteEvent">
                                     <button id="deleteEventButton" type="submit">Delete</button>

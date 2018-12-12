@@ -5,7 +5,6 @@ import com.TicketIT.Model.*;
 import com.mongodb.MongoClient;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +12,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "RegisterServlet")
 public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         MongoClient mongo = (MongoClient) request.getServletContext().getAttribute("MONGO_CLIENT");
@@ -47,6 +45,10 @@ public class RegisterServlet extends HttpServlet {
         } else {
             member.setCardId(cardDAO.GetCardByNumber(request.getParameter("cardNumber")).getId());
         }
+
+        // First member of site is Admin.
+        if(memberDAO.GetAllMembers().size() == 1)
+            member.setIsAdmin(true);
 
         // Update member object in database.
         memberDAO.UpdateMember(member);

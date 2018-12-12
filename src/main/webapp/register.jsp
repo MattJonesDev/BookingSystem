@@ -57,7 +57,7 @@
                         <td><input type="text" name="cardHolder" placeholder="Card Holder" required></td>
                     </tr>
                     <tr>
-                        <td><input type="text" name="addressLine3" placeholder="Address Line 3" required></td>
+                        <td><input type="text" name="addressLine3" placeholder="Address Line 3" ></td>
                         <td><input type="text" name="cardNumber" placeholder="Card Number" required></td>
                     </tr>
                     <tr>

@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "AdminEditEventServlet")
 public class AdminEditEventServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         MongoClient mongo = (MongoClient) request.getServletContext().getAttribute("MONGO_CLIENT");
@@ -50,6 +49,7 @@ public class AdminEditEventServlet extends HttpServlet {
                 ticket.setName(request.getParameter("ticketName"));
                 ticket.setPrice(Double.parseDouble(request.getParameter("ticketPrice")));
                 ticket.setNumberAvailable(Integer.parseInt(request.getParameter("ticketAvailable")));
+                ticket.setEventId(request.getParameter("eventId"));
                 ticketDAO.UpdateTicket(ticket);
             } else if (request.getParameter("action").equals("deleteTicket")) {
                 // Delete the chosen ticket from database.

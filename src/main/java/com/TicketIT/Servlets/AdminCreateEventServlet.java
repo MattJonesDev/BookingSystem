@@ -13,7 +13,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 
-@WebServlet(name = "AdminCreateEventServlet")
 public class AdminCreateEventServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         MongoClient mongo = (MongoClient) request.getServletContext().getAttribute("MONGO_CLIENT");
@@ -41,12 +40,11 @@ public class AdminCreateEventServlet extends HttpServlet {
         ticket.setNumberAvailable(Integer.parseInt(request.getParameter("ticketAvailable")));
         ticket.setEventId(event.getId());
 
-        // Update Event & Ticket objects in database.
         eventDAO.UpdateEvent(event);
         ticketDAO.UpdateTicket(ticket);
 
         // Redirect back to admin dashboard.
-        request.getRequestDispatcher("/adminDashboard.jsp").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/admin");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -31,7 +31,7 @@
             <h1>Edit event</h1><br>
             <h2>Event Details</h2>
             <!-- Editing of details of the event. -->
-            <form action="adminEdit" method="POST">
+            <form class="detailsForm" action="adminEdit" method="POST">
                 <input type="hidden" name="action" value="editEvent">
                 <input type="hidden" name="eventId" value="${eventId}">
                 <table class="detailsTable">
@@ -52,23 +52,31 @@
             <br></br>
             <h2>Edit Event Tickets</h2>
             <!-- Create a new ticket for the event -->
-            <form action="adminEdit" method="POST">
+            <form class="infoSelectForm" action="adminEdit" method="POST">
                 <input type="hidden" name="action" value="createTicket">
-                <table class="detailsTable">
+                <input type="hidden" name="eventId" value="${eventId}">
+                <table class="infoSelectTable">
+                    <tr>
+                        <td>Ticket Name</td>
+                        <td>Ticket Price</td>
+                        <td>Number Available</td>
+                        <td> </td>
+                    </tr>
                     <tr>
                         <td><input type="text" name="ticketName" placeholder="Name" required></td>
-                        <td><input type="text" name="ticketPrice" placeholder="Description" required></td>
-                        <td><input type="text" name="ticketAvailable" placeholder="Number Available" required></td>
+                        <td><input type="number" name="ticketPrice" placeholder="Price" min="1.00" value="1.00" step="0.01" required></td>
+                        <td><input type="number" name="ticketAvailable" placeholder="Number Available" min="1"  value="1" required></td>
                         <td><button type="submit" style="text-align: center">Add</button></td>
                     </tr>
                 </table>
             </form>
             <!-- List tickets for the event with option to delete. -->
             <c:forEach items="${eventTickets}" var="ticket">
-                <form action="adminEdit" method="POST">
+                <form class="infoSelectForm" action="adminEdit" method="POST">
                     <input type="hidden" name="action" value="deleteTicket">
+                    <input type="hidden" name="eventId" value="${eventId}">
                     <input type="hidden" name="ticketId" value="${ticket.getId()}">
-                    <table class="detailsTable">
+                    <table class="infoSelectTable">
                         <tr>
                             <td><input type="text" name="ticketName" value="${ticket.getName()}" readonly="readonly"></td>
                             <td><input type="text" name="ticketPrice" value="${ticket.getPrice()}" readonly="readonly"></td>

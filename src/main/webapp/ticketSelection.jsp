@@ -29,7 +29,7 @@
 
         <div class="pageContent">
             <!-- Display event summary -->
-            <div class="eventSummary" style="background-image: url(${chosenEvent.getNameAsImagePath()})"/>
+            <div class="eventSummary" style="background-image: url(${chosenEvent.getImageBackground()})"/>
                 <div id="titleAndDescription" style="width: 100%">
                     <p><b>${chosenEvent.getTitle()}</b><br>${chosenEvent.getDescription()}</p>
                 </div>
