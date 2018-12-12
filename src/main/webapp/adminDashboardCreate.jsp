@@ -31,7 +31,7 @@
             <h1>Create a new event</h1><br>
 
             <!-- Form to create a new event. -->
-            <form class="detailsForm" action="adminCreate" method="POST" enctype="multipart/form-data">
+            <form class="detailsForm" action="adminCreate" method="POST">
                 <table class="detailsTable">
                     <tr>
                         <td><h2>Ticket</h2></td>
@@ -43,11 +43,11 @@
                     </tr>
                     <tr>
                         <td><input type="text" name="eventDesc" placeholder="Event Description" required></td>
-                        <td><input type="text" name="ticketPrice" placeholder="Ticket Price" required></td>
+                        <td><input type="number" name="ticketPrice" placeholder="Ticket Price" value="1.00" min="1.00" step="0.01" required></td>
                     </tr>
                     <tr>
                         <td> </td>
-                        <td><input type="text" name="ticketAvailable" placeholder="Number Available" required></td>
+                        <td><input type="number" name="ticketAvailable" placeholder="Number Available" value="1" min="1" required></td>
                     </tr>
                     <tr>
                         <td><input type="date" name="eventDate" placeholder="Event Date" required></td>
