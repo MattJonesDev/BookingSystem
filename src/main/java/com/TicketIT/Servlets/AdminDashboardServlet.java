@@ -8,7 +8,6 @@ import com.mongodb.MongoClient;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,8 +21,10 @@ public class AdminDashboardServlet extends HttpServlet {
         MongoDBMemberDAO memberDAO = new MongoDBMemberDAO(mongo);
 
         // Validate that the user is allowed to be here.
-        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies()))
+        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies())) {
             response.sendRedirect(request.getContextPath());
+            return;
+        }
 
         // If there's a action request, process it.
         if(request.getParameterMap().containsKey("action")){
@@ -43,14 +44,16 @@ public class AdminDashboardServlet extends HttpServlet {
         MongoDBMemberDAO memberDAO = new MongoDBMemberDAO(mongo);
 
         // Validate that the user is allowed to be here.
-        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies()))
+        if(!AdminUtils.IsMemberAllowedAccess(memberDAO, request.getCookies())) {
             response.sendRedirect(request.getContextPath());
+            return;
+        }
 
         // Get all events from database.
         MongoDBEventDAO eventDAO = new MongoDBEventDAO(mongo);
         List<Event> events = eventDAO.GetAllEvents();
 
         request.setAttribute("eventList", events);
-        request.getRequestDispatcher("/home.jsp").forward(request, response);
+        request.getRequestDispatcher("/adminDashboard.jsp").forward(request, response);
     }
 }

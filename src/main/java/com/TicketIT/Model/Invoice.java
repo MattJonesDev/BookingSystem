@@ -1,7 +1,5 @@
 package com.TicketIT.Model;
 
-import java.util.UUID;
-
 public class Invoice {
 
     private String id;

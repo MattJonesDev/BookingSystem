@@ -1,8 +1,6 @@
 package com.TicketIT.Model;
 
-import org.eclipse.jetty.util.URIUtil;
-
-import java.util.UUID;
+import java.util.Random;
 
 public class Event {
 
@@ -36,7 +34,10 @@ public class Event {
 
     public void setTime(String time) { this.time = time; }
 
-    public String getNameAsImagePath(){
-        return "images/" + this.title.toLowerCase().replaceAll("\\s+","") + ".jpg";
+    public String getImageBackground(){
+        Random random = new Random();
+        Integer value = random.nextInt(4);
+        return "/images/stock" + value + ".jpg";
     }
+
 }
